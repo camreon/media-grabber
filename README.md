@@ -2,7 +2,7 @@
 extension that gets/uses a page's most recently played audio URL
 
 #### usage
-1. install
+1. install from [chrome web store](https://chrome.google.com/webstore/detail/audio-history/ompogmmmcfgapifeghieaklpblkkoloo?hl=en-US&gl=US)
 2. click pageAction icon in menu bar
 3. copy/paste audio URL (or POST it to an external source)
 
