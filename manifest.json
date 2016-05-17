@@ -1,7 +1,7 @@
 {
   "name": "audio history",
   "version": "1.0",
-  "description": "keeps a history of all audio played in chrome",
+  "description": "keeps a history of the most recent audio played in chrome",
   "background": { 
     "scripts": ["background.js"],
     "persistent": true 

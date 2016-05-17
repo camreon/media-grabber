@@ -1,16 +1,22 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Popup</title>
-  </head>
-  <body>
-    <div id="popup">
-      <span>Added: </span>
-      <h2 id="sent">N/A</h2>
-    </div>
-    <hr />
-    <button id="go-to-options">Options</button>
+<head>
+  <title>Popup</title>
+  <link href="css/popup.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div id="popup">
+    <b>Audio: </b><div id="mediaURL">N/A</div><br>
+    <b>Source: </b><div id="tabURL">N/A</div><br>
+    <b>Sent: </b><div id="sent">N/A</div><br>
+  </div>
 
-    <script type="text/javascript" src="popup.js"></script>
-  </body>
+  <hr />
+  <div class="footer">
+    <button id="go-to-options">Options</button>
+<!--     <b>Playlist: &nbsp;</b><div id="playlist"></div> -->
+  </div>
+  
+  <script type="text/javascript" src="popup.js"></script>
+</body>
 </html>

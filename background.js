@@ -1,4 +1,4 @@
-var the_media;
+var mediaStorage = [];
 
 var isMedia = {
   conditions: [
@@ -6,36 +6,42 @@ var isMedia = {
       contentType: ['audio/mpeg', 'video/webm'] }),
   ],
   actions: [
-    new chrome.declarativeWebRequest.SendMessageToExtension({message: 'send media'})
+    new chrome.declarativeWebRequest.SendMessageToExtension({message: 'media found'})
   ]
 };
-
 
 chrome.declarativeWebRequest.onRequest.removeRules(undefined, function() {
   chrome.declarativeWebRequest.onRequest.addRules([isMedia]);
 });
 
+
 chrome.declarativeWebRequest.onMessage.addListener(function(media) {
   chrome.tabs.get(media.tabId, function(tab) { 
-    media.tabURL = tab.url; 
+    mediaStorage[media.tabId] = { tab: tab.url, url: media.url };
   });
 
   chrome.pageAction.show(media.tabId);
-  the_media = media;
 });
 
-chrome.runtime.onMessage.addListener(function(msg, sender, response) {
-  var sent = false;
-  if (msg === 'pageActionClicked') {
-    // console.info(the_media);
-    
-    var playlistURL = chrome.storage.sync.get({
-      playlistURL: "" 
-    }, function(items) {
-      sent = sendToPlaylist(the_media, items.playlistURL);
-      response({ sent: sent });
-    });
-  }
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if (request.event === 'getMedia') {
+      chrome.storage.sync.get(['usePlaylist', 'playlistURL'], function(item) {
+        var media = mediaStorage[request.tabId];
+
+        if (item.usePlaylist) { sendToPlaylist(media, item.playlistURL); }
+
+        sendResponse({  
+          sent: item.usePlaylist,
+          tab: media.tab,
+          media: media.url,
+          playlist: item.playlistURL
+        });
+      });
+      
+      return true;
+    }
 });
 
 function sendToPlaylist(media, playlistURL) {
@@ -47,14 +53,16 @@ function sendToPlaylist(media, playlistURL) {
     if (xhr.readyState === XMLHttpRequest.DONE && xhr.staus == 302)
       sent = true;
   });
-
-//   xhr.addEventListener("error", function(e) {
+  xhr.addEventListener("error", function(e) {
+    sent = false;
+    console.error(e);
 //     media.tabURL = media.url; // try to send the media url next
 //     sendToPlaylist(media);
-//   });
+  });
 
   xhr.open(method, playlistURL);
   xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-  xhr.send('url=' + encodeURIComponent(media.tabURL));
+  xhr.send('url=' + encodeURIComponent(media.tab));
+
   return sent;
 }

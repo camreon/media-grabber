@@ -1,0 +1,20 @@
+div { 
+    word-wrap: break-word;
+}
+body {
+    max-width: 500px;
+    min-width: 250px;
+    background-color: rgba(232, 232, 232, 0.52);
+}
+
+.footer > * {
+    display: inline-block;
+}
+
+.footer > b {
+    margin-left: 10px;
+}
+
+.footer {
+    padding: 5px 0;
+}

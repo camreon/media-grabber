@@ -4,18 +4,27 @@
   <title>Options</title>
   <style type="text/css">
     body: { padding: 10px; }
-    #playlistURL { width: 75% }
+    #playlistURL { width: 70%; margin-left: 5px; }
+    button#save { margin-top: 30px; display: inline; }
+    #status { 
+      margin-left: 10px; 
+      display: inline; 
+      color: green;
+      padding: 4.5px 9px;
+      font-weight: bold;
+    }
   </style>
 </head>
 
 <body>
   <label>
-    Send audio to: 
+    <input type="checkbox" id="usePlaylist">
+    Send audio to:  
     <input type="text" id="playlistURL">
   </label>
   
-  <div id="status"></div>
   <button id="save">Save</button>
+  <div id="status"></div>
 
   <script src="options.js"></script>
 </body>
