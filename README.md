@@ -1,14 +1,22 @@
-# chrome-audio-history
-extension that gets/uses a page's most recently played audio URL
+# Media Grabber
+chrome extension to get the media URL of a page's most recently played audio/video (and then do something with it).
 
 #### usage
 1. install from [chrome web store](https://chrome.google.com/webstore/detail/audio-history/ompogmmmcfgapifeghieaklpblkkoloo?hl=en-US&gl=US)
-2. click pageAction icon in menu bar
-3. copy/paste audio URL (or POST it to an external source)
+2. click pageAction icon in menu bar to:
+    1. copy/paste the displayed audio URL
+    2. automatically send it to an external source (configured in Options)
 
 #### options
-1. **enabled** - turn on/off sending the audio URL to an external source
-2. **send audio to** - the specified URL when the pageAction is clicked
+1. **source** - choose to send the media URL or the page's URL
+2. **destination** - where the source is POSTed to on pageAction click (example destination: [UMQ](https://github.com/camreon/UMQ-py))
+3. **enabled** - turn on/off sending the audio URL to an external source
+
+#### import
+1. enter the name of a bookmark folder
+2. send the URLs of all contained bookmarks to the destination
+
+---
 
 #### The MIT License (MIT)
 ```
