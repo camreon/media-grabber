@@ -4,6 +4,7 @@ function setDOMInfo(info) {
   if (info.opt.dest !== undefined) $('#dest').text(info.opt.dest);
   if (info.opt.source !== undefined) $('#src').text(info.opt.source);
   if (!info.opt.output) $('#output').hide();
+  console.info(info);
 
   $('#dest').on('click', function() {
     var dest_url = new URL(info.dest);

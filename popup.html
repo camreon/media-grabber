@@ -6,17 +6,21 @@
 </head>
 <body>
   <div id="popup">
-    <b>Audio: </b><div id="mediaURL">N/A</div><br>
-    <b>Source: </b><div id="tabURL">N/A</div><br>
-    <b>Sent: </b><div id="sent">N/A</div><br>
+    <b>MEDIA URL: </b><div id="mediaURL">N/A</div><br>
+    <b>PAGE URL: </b><div id="tabURL">N/A</div><br>
+
   </div>
 
   <hr />
   <div class="footer">
+    <div id="output">
+      <span>Sent the </span><b id="src">n/a</b>
+      <span> to </span><span><a id="dest" href="#"></a></span><br>
+    </div>
     <button id="go-to-options">Options</button>
-<!--     <b>Playlist: &nbsp;</b><div id="playlist"></div> -->
   </div>
-  
-  <script type="text/javascript" src="popup.js"></script>
+
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="js/popup.js" type="text/javascript"></script>
 </body>
 </html>

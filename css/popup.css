@@ -1,4 +1,4 @@
-div { 
+div {
     word-wrap: break-word;
 }
 body {
@@ -17,4 +17,14 @@ body {
 
 .footer {
     padding: 5px 0;
+}
+#go-to-options {
+    float: right;
+    margin-bottom: 10px;
+}
+
+
+#output {
+    background-color: rgba(51, 122, 183, 0.32);
+    padding: 5px 10px;
 }

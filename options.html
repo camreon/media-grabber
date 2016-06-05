@@ -2,30 +2,45 @@
 <html>
 <head>
   <title>Options</title>
-  <style type="text/css">
-    body: { padding: 10px; }
-    #playlistURL { width: 70%; margin-left: 5px; }
-    button#save { margin-top: 30px; display: inline; }
-    #status { 
-      margin-left: 10px; 
-      display: inline; 
-      color: green;
-      padding: 4.5px 9px;
-      font-weight: bold;
-    }
-  </style>
+  <link href='css/options.css' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
-  <label>
-    <input type="checkbox" id="usePlaylist">
-    Send audio to:  
-    <input type="text" id="playlistURL">
-  </label>
-  
-  <button id="save">Save</button>
-  <div id="status"></div>
+  <div id='form'>
+    <h1>OUTPUT</h1>
+    <label><b>Source: </b><br>
+      <select name='source' id='source'>
+        <option value='MEDIA URL'>Media URL</option>
+        <option value='PAGE URL'>Page URL</option>
+      </select>
+    </label><br>
+    <label><b>Destination: </b>
+      <input type='url' placeholder='URL' id='dest'>
+    </label><br>
+    <label><b>Enabled: </b>
+      <input type='checkbox' id='output'>
+    </label>
 
-  <script src="options.js"></script>
+    <div id='status'></div>
+    <button id='save'>SAVE</button>
+  </div>
+
+  <h1>INPUT</h1>
+  <label><b>Bookmark Folder: </b>
+    <input type='text' placeholder='' id='bookmark'>
+  </label>
+  <br>
+  <button id='import'>Import from bookmarks</button>
+  <div id='error'>
+    <b class='header'>Error:</b>
+    <br><br>
+  </div>
+  <div id='result'>
+    <b class='header'>Results:</b>
+    <br><br>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src='js/options.js' type="text/javascript"></script>
 </body>
 </html>

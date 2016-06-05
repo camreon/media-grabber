@@ -49,6 +49,7 @@ function sendToPlaylist(el, index, array) {
     event: 'sendToPlaylist',
     src: el.url
   }, function(res) {
+    console.log(res.result);
     show('result', 'Sent ' + res.tab + ' to ' + res.opt.dest);
   });
 }
