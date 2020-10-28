@@ -9,7 +9,7 @@ chrome extension to get the media URL of a page's most recently played audio/vid
 
 #### options
 1. **source** - choose to send the media URL or the page's URL
-2. **destination** - where the source is POSTed to on pageAction click (example destination: [UMQ](https://github.com/camreon/UMQ-py))
+2. **destination** - where the source is POSTed to on pageAction click (example destination: [UMQ](https://github.com/camreon/UMQ))
 3. **enabled** - turn on/off sending the audio URL to an external source
 
 #### import

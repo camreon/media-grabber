@@ -1,27 +1,20 @@
 var mediaStorage = [];
-var isMedia = {
-  conditions: [
-    new chrome.declarativeWebRequest.RequestMatcher({
-      contentType: [ 'audio/mpeg', 'video/webm', 'video/mp4' ]
-    }),
-  ],
-  actions: [
-    new chrome.declarativeWebRequest.SendMessageToExtension({message: 'foundMedia'})
-  ]
-};
 
-chrome.declarativeWebRequest.onRequest.removeRules(undefined, function() {
-  chrome.declarativeWebRequest.onRequest.addRules([isMedia]);
-});
-
-chrome.declarativeWebRequest.onMessage.addListener(function(media) {
-  if (media.message === 'foundMedia') {
+chrome.webRequest.onBeforeRequest.addListener(
+  function(media) {
+    console.log(media);
+    
     chrome.tabs.get(media.tabId, function(tab) {
       mediaStorage[media.tabId] = { tab: tab.url, url: media.url };
     });
     chrome.pageAction.show(media.tabId);
-  }
-});
+  },
+  // filters
+  {
+    urls: ['https://*/*', 'http://*/*'],
+    types: ['media']
+  },
+);
 
 chrome.runtime.onMessage.addListener(
   function(req, sender, sendRes) {
@@ -64,7 +57,8 @@ function sendToPlaylist(media, playlistURL) {
     return false;
   });
 
+  var data = { 'url': media };
   xhr.open(method, playlistURL);
-  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-  xhr.send('url=' + encodeURIComponent(media));
+  xhr.setRequestHeader('Content-type', 'application/json;');
+  xhr.send(JSON.stringify(data));
 }
