@@ -28,3 +28,45 @@ body {
     background-color: rgba(51, 122, 183, 0.32);
     padding: 5px 10px;
 }
+
+.media-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.media-row .kind {
+    flex: 0 0 46px;
+    margin-right: 6px;
+    padding: 1px 4px;
+    border-radius: 3px;
+    background-color: rgba(51, 122, 183, 0.32);
+    font-size: 10px;
+    line-height: 14px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* min-width lets the URL wrap inside its own column instead of
+   forcing the row wider than the popup. */
+.media-row .body {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.media-row .url {
+    display: block;
+    -webkit-user-select: all;
+    user-select: all;
+    font-size: 11px;
+    line-height: 14px;
+    word-break: break-all;
+}
+
+.media-row .note {
+    display: block;
+    margin-top: 2px;
+    color: #8a6d3b;
+    font-size: 10px;
+    font-style: italic;
+}
