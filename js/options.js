@@ -1,10 +1,15 @@
 function save_options() {
   chrome.storage.sync.set({
-    dest: $('#dest').val(),
-    source: $('#source').val(),
-    output: $('#output').prop('checked')
+    dest: document.getElementById('dest').value,
+    source: document.getElementById('source').value,
+    output: document.getElementById('output').checked
   }, function() {
-    $('#status').show().text('SAVED!').delay(2000).fadeOut();
+    var status = document.getElementById('status');
+    status.textContent = 'SAVED!';
+    status.style.display = 'block';
+    setTimeout(function() {
+      status.style.display = 'none';
+    }, 2000);
   });
 }
 
@@ -14,20 +19,22 @@ function restore_options() {
     source: '',
     output: false
   }, function(opt) {
-    $('#dest').val(opt.dest);
-    $('#source').val(opt.source);
-    $('#output').prop('checked', opt.output);
-    $('#dest, #source').prop('disabled', !opt.output);
+    document.getElementById('dest').value = opt.dest;
+    document.getElementById('source').value = opt.source;
+    document.getElementById('output').checked = opt.output;
+    document.getElementById('dest').disabled = !opt.output;
+    document.getElementById('source').disabled = !opt.output;
   });
 }
 
 function import_bookmark() {
-  var query = $('#bookmark').val();
-  $('#bookmark').removeClass('error');
+  var bookmark = document.getElementById('bookmark');
+  var query = bookmark.value;
+  bookmark.classList.remove('error');
   hideMessages();
 
   if (!query || query == '') {
-    $('#bookmark').addClass('error');
+    bookmark.classList.add('error');
     show('error', 'Please enter a folder name.');
   } else {
     chrome.bookmarks.search({ title: query }, function(folders) {
@@ -54,25 +61,32 @@ function sendToPlaylist(el, index, array) {
 }
 
 function show(type, text) {
-  var area = $('#'+type);
-  area.append($('<div>'+text+'</div>')).show();
+  var area = document.getElementById(type);
+  var div = document.createElement('div');
+  div.textContent = text;
+  area.appendChild(div);
+  area.style.display = 'block';
 }
 
 function hideMessages() {
   var types = ['error', 'result'];
-  types.forEach(function(type, index, arr) {
-    var area = $('#'+type);
-    area.hide().find('div').remove();
+  types.forEach(function(type) {
+    var area = document.getElementById(type);
+    area.style.display = 'none';
+    area.querySelectorAll('div').forEach(function(div) {
+      div.remove();
+    });
   });
 }
 
-$(function() {
+document.addEventListener('DOMContentLoaded', function() {
   restore_options();
 
-  $('#output').change(function(e) {
-    $('#dest, #source').prop('disabled', !this.checked);
+  document.getElementById('output').addEventListener('change', function(e) {
+    document.getElementById('dest').disabled = !this.checked;
+    document.getElementById('source').disabled = !this.checked;
   });
 
-  $('#save').on('click', save_options);
-  $('#import').on('click', import_bookmark);
+  document.getElementById('save').addEventListener('click', save_options);
+  document.getElementById('import').addEventListener('click', import_bookmark);
 });
